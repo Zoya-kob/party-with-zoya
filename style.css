@@ -262,7 +262,7 @@ section h2 {
 
 /* Give alternating sections a light background.
    :nth-child(even) = every 2nd section */
-section:nth-child(even) {
+section:nth-child(odd) {
     background-color: var(--color-light);
     max-width: 100%;
     /* Full-width background, but content stays centered: */
