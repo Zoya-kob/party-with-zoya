@@ -1,0 +1,512 @@
+/* =============================================
+   CSS BASICS — HOW THIS FILE WORKS
+
+   CSS follows this pattern:
+
+   selector {
+       property: value;
+   }
+
+   "selector"  = WHAT to style (a tag, class, or id)
+   "property"  = WHAT aspect to change (color, size, spacing)
+   "value"     = HOW to change it (blue, 20px, center)
+
+   A class selector starts with a dot:  .hero { }
+   An id selector starts with a hash:   #about { }
+   A tag selector is just the tag name: h1 { }
+   ============================================= */
+
+
+/* =============================================
+   1. CSS VARIABLES (Custom Properties)
+
+   Define your colors and fonts in ONE place.
+   Then use var(--name) everywhere else.
+   Want to change your whole color scheme?
+   Just edit these lines.
+   ============================================= */
+:root {
+    --color-primary: #be1a87;      /* Dark blue-gray — headings, nav */
+    --color-accent: #1abc9c;       /* Warm orange — buttons, highlights */
+    --color-light: #faa4f7;        /* Off-white — section backgrounds */
+    --color-white: #ffffff;
+    --color-text: #232323;         /* Dark gray — body text */
+    --color-text-light: #2e302f;   /* Medium gray — captions, subtle text */
+    --font-heading: 'Calistoga', cursive;        /* h1 — big display heading */
+    --font-h2: 'Poppins', sans-serif;             /* h2 — section titles */
+    --font-h3: 'Ribeye', cursive;                 /* h3 — card/sub headings */
+    --font-body: 'Montserrat', sans-serif;        /* paragraphs & body text */
+}
+
+
+/* =============================================
+   2. RESET & BASE STYLES
+
+   Browsers add their own default spacing and styling.
+   This removes it so we start from a clean slate,
+   then sets sensible defaults for the whole page.
+   ============================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* box-sizing: border-box means padding and borders
+       are INCLUDED in an element's width. Without this,
+       a 300px box with 20px padding becomes 340px wide.
+       With it, it stays 300px. Life saver. */
+}
+
+html {
+    scroll-behavior: smooth;
+    /* Makes clicking nav links glide to the section
+       instead of jumping instantly */
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--color-text);
+    line-height: 1.6;
+    /* line-height is the space between lines of text.
+       1.6 = 160% of the font size. Makes paragraphs readable. */
+}
+
+img {
+    max-width: 100%;
+    /* Prevents images from overflowing their container.
+       A 4000px wide photo will shrink to fit, not break your layout. */
+    height: auto;
+    display: block;
+}
+h1 {
+    font-family: var(--font-heading);
+}
+
+h2 {
+    font-family: var(--font-h2);
+    font-weight: 700;
+}
+
+h3 {
+    font-family: var(--font-h3);
+    font-size: 1.8rem;
+    margin-bottom: 24px;
+}
+a {
+    text-decoration: none;
+    /* Removes the default underline on links */
+    color: var(--color-accent);
+}
+
+a:hover {
+    /* :hover = what happens when the mouse is over it */
+    opacity: 0.8;
+}
+
+
+/* =============================================
+   3. REUSABLE BUTTON STYLE
+
+   Any element with class="btn" gets this look.
+   We used it on "Book a Call" and "Email Me".
+   ============================================= */
+.btn {
+    display: inline-block;
+    background-color: var(--color-accent);
+    color: var(--color-white);
+    padding: 14px 32px;
+    /* padding: top/bottom  left/right */
+    border-radius: 6px;
+    /* Rounds the corners. Higher number = rounder. */
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    /* transition = animate the change over 0.3 seconds
+       instead of snapping instantly. Feels polished. */
+}
+
+.btn:hover {
+    background-color: #138d77;
+    /* Slightly darker orange on hover */
+    opacity: 1;
+    color: var(--color-white);
+}
+
+
+/* =============================================
+   4. HEADER & NAVIGATION
+
+   Flexbox layout — this is the big one.
+
+   display: flex  = lay children out in a row (or column)
+   justify-content: space-between = push items to opposite ends
+   align-items: center = vertically center them
+
+   Think of it like: put the logo on the left,
+   the nav links on the right, centered vertically.
+   ============================================= */
+header {
+    background-color: var(--color-primary);
+    padding: 0 40px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    /* sticky = the header stays at the top when you scroll.
+       z-index: 100 = it sits ON TOP of other content. */
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    /* margin: 0 auto centers the nav within the header.
+       auto on left and right = equal space on both sides. */
+    height: 70px;
+}
+
+nav .logo {
+    color: var(--color-white);
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    /* list-style: none removes the bullet points */
+    gap: 30px;
+    /* gap = space BETWEEN each list item */
+}
+
+nav ul li a {
+    color: var(--color-white);
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: opacity 0.3s ease;
+}
+
+nav ul li a:hover {
+    opacity: 0.7;
+}
+
+
+/* =============================================
+   5. HERO SECTION
+
+   The big intro area. We center everything
+   and give it lots of vertical space.
+   ============================================= */
+.hero {
+    background-color: var(--color-white);
+    color: var(--color-primary);
+    text-align: center;
+    padding: 120px 40px 140px;
+    /* Lots of top/bottom padding = tall section */
+}
+
+.hero h1 {
+    font-size: 2.8rem;
+    color:var(--color-white);
+    margin-bottom: 5px;
+}
+
+.hero .tagline {
+    font-size: 1.2rem;
+    margin-bottom: 48px;
+    font-family: var(--font-h2);
+    color: var(--color-white);
+    opacity: 0.9;
+    max-width: 300px;
+    padding: 0 40px;
+    margin-left: auto;
+    margin-right: auto;
+    /* max-width + auto margins = centered text block
+       that doesn't stretch too wide on big screens */
+}
+
+.hero .btn {
+    font-size: 1.1rem;
+    padding: 16px 40px;
+    margin: 0 10px;
+    margin-bottom: 32px;
+}
+
+.hero p {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 40px;
+}
+
+
+/* =============================================
+   6. SHARED SECTION STYLING
+
+   Every <section> gets consistent padding and centering.
+   Alternating background colors break up the page visually.
+   ============================================= */
+section {
+    padding: 80px 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 100px 40px;
+}
+
+section h2 {
+    font-size: 2rem;
+    color: var(--color-primary);
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+/* Give alternating sections a light background.
+   :nth-child(even) = every 2nd section */
+section:nth-child(even) {
+    background-color: var(--color-light);
+    max-width: 100%;
+    /* Full-width background, but content stays centered: */
+}
+
+section:nth-child(even) h2,
+section:nth-child(even) .about-content,
+section:nth-child(even) .services-grid,
+section:nth-child(even) .gallery-grid {
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* =============================================
+   7. ABOUT SECTION
+
+   Flexbox again — photo on the left, text on the right.
+   On small screens, they'll stack vertically.
+   ============================================= */
+.about-content {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    /* gap = space between the photo and text */
+}
+
+.about-photo {
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    /* border-radius: 50% = perfect circle.
+       Your photo will be cropped into a circle. */
+    object-fit: cover;
+    /* object-fit: cover = scales the image to fill
+       the box without stretching. Crops the edges if needed. */
+    flex-shrink: 0;
+    /* Prevents the photo from shrinking if space is tight */
+}
+
+.about-text p {
+    margin-bottom: 16px;
+    font-size: 1.05rem;
+    color: var(--color-text-light);
+    text-align: center;
+}
+
+
+/* =============================================
+   8. SERVICES SECTION — CSS Grid
+
+   Grid is like flexbox's sibling — perfect for
+   equal-sized cards in rows and columns.
+
+   grid-template-columns: repeat(3, 1fr)
+     = 3 columns, each taking 1 fraction of space (equal width)
+   ============================================= */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.service-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
+
+.service-card {
+    background: var(--color-white);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    /* box-shadow = subtle drop shadow. Makes cards "float."
+       0 2px 10px = no horizontal offset, 2px down, 10px blur
+       rgba(0,0,0,0.08) = black at 8% opacity (very subtle) */
+}
+
+.service-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+    color: var(--color-primary);
+}
+
+.service-card p {
+    color: var(--color-text-light);
+    font-size: 0.95rem;
+}
+
+
+/* =============================================
+   9. GALLERY SECTION
+   ============================================= */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.gallery-grid figure {
+    border-radius: 8px;
+    overflow: hidden;
+    /* overflow: hidden clips the image to the
+       rounded corners of the container */
+}
+
+.gallery-grid img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.gallery-grid img:hover {
+    transform: scale(1.05);
+    /* Slight zoom on hover — a nice touch */
+}
+
+.gallery-grid figcaption {
+    padding: 10px;
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+    text-align: center;
+}
+
+
+/* =============================================
+   10. BOOKING SECTION
+   ============================================= */
+#booking {
+    text-align: center;
+}
+
+#booking p {
+    font-size: 1.1rem;
+    color: var(--color-text-light);
+    margin-bottom: 24px;
+}
+
+
+/* =============================================
+   11. CONTACT SECTION
+   ============================================= */
+#contact {
+    text-align: center;
+}
+
+#contact p {
+    font-size: 1.1rem;
+    color: var(--color-text-light);
+    margin-bottom: 24px;
+}
+
+.social-links {
+    margin-top: 24px;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+.social-links a {
+    color: var(--color-primary);
+    font-size: 3rem !important;
+}
+
+.social-links a:hover {
+    color: var(--color-accent);
+}
+
+
+/* =============================================
+   12. FOOTER
+   ============================================= */
+footer {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    text-align: center;
+    padding: 30px 20px;
+    font-size: 0.9rem;
+}
+
+
+/* =============================================
+   13. RESPONSIVE DESIGN — Mobile Friendly
+
+   @media = "when the screen is this size, use these rules instead"
+   768px is roughly where tablets end and phones begin.
+
+   Everything above this point is the "desktop" layout.
+   Everything below overrides it for smaller screens.
+   ============================================= */
+
+/* Fade-in animation */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+
+    /* Stack nav links below the logo on mobile */
+    nav {
+        flex-direction: column;
+        height: auto;
+        padding: 15px 0;
+        gap: 10px;
+    }
+
+    nav ul {
+        gap: 15px;
+    }
+
+    /* Smaller hero text */
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero .tagline {
+        font-size: 1rem;
+    }
+
+    /* Stack about photo above text */
+    .about-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    /* Services: 1 column instead of 3 */
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Gallery: 1 column instead of 3 */
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+}
