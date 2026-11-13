@@ -493,16 +493,21 @@ footer {
     }
 
     nav ul {
-        gap: 15px;
+        gap: 10px;
     }
-
+    .hero {
+    padding-top: 60px;
+    }
     /* Smaller hero text */
     .hero h1 {
         font-size: 2rem;
+        margin-bottom:15px;
     }
-
+    .hero h2 {
+        font-size: 1.3rem;
+    }
     .hero .tagline {
-        font-size: 1rem;
+        font-size: 0.7rem;
     }
 
     /* Stack about photo above text */
